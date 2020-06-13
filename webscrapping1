@@ -10,7 +10,7 @@ parser.add_argument("--page_num_max", help = 'Enter the number of pages to parse
 parser.add_argument("--dbname", help = 'Enter the name of db', type = str )
 args = parser.parse_args()
 
-oyo_url = 'https://www.oyorooms.com/hotels-in-bangalore/'
+oyo_url = 'https://www.oyorooms.com/hotels-in-bangalore/?page='
 page_num_max = args.page_num_max
 scrapped_info_list = []
 connect.connect(args.dbname)
@@ -31,7 +31,7 @@ for page_num in range(1,page_num_max):
         # try ... except
         try:
             hotel_dict['rating'] = hotel.find('span', {'class' : 'hotelRating_ratingSummary'}).text
-        except AttributError:
+        except AttributeError:
             hotel_dict['rating'] = None
 
         parent_amenities_element = hotel.find("div", {'class' : 'amenityWrapper'})
@@ -48,7 +48,5 @@ for page_num in range(1,page_num_max):
 
         # print(hotel_name,hotel_address,hotel_price,hotel_rating)
 
-df = pd.DataFrame(scrapped_info_list)
 
-df.to_csv("Oyorooms.csv")
 connect.get_hotel_info(args.dbname)
