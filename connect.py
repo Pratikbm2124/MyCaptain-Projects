@@ -1,4 +1,5 @@
 # SQL (Structured Query Language)
+# This file is required to run the other file(webscrapping1)
 
 import sqlite3
 
